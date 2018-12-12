@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+							http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- Enable Anotation -->
+	<context:annotation-config/>
+	  
+	<!-- Enable Properties -->
+	<context:property-placeholder location="classpath:application.properties"/>
+	
+	<!-- To import more beans -->
+	<!-- <import resource="spring2.xml"/> -->
+	
+	<bean id="seed1" class="com.beans.Seeds">
+		<property name="color" value="ONE"></property>
+		<property name="count" value="1"></property>
+	</bean>
+	<bean id="seed2" class="com.beans.Seeds">
+		<property name="color" value="TWO"></property>
+		<property name="count" value="2"></property>
+	</bean>
+	
+	<!-- Setter Injection -->
+	<bean id="apple1" class="com.beans.Apple" init-method="customInit" destroy-method="customDestory">
+		<property name="name" value="APPLE-ONE"></property>
+		<property name="cost" value="1000"></property>
+		<property name="seeds" ref="seed1"></property>
+	</bean>
+	
+	<bean id="apple2" class="com.beans.Apple">
+		<property name="name" value="APPLE-TWO"></property>
+		<property name="cost" value="2000"></property>
+		<property name="seeds" ref="seed2"></property>
+	</bean>
+	
+	<!-- Constructor Injection -->
+	<bean id="apple3" class="com.beans.Apple">
+		<constructor-arg name="cost" value="3000"></constructor-arg>
+		<constructor-arg name="name" value="APPLE-THREE"></constructor-arg>
+		<constructor-arg name="seeds" ref="seed1"></constructor-arg>
+	</bean>
+	
+	<bean id="apple4" class="com.beans.Apple">
+		<constructor-arg name="cost" value="4000"></constructor-arg>
+		<constructor-arg name="name" value="APPLE-FOUR"></constructor-arg>
+		<constructor-arg name="seeds" ref="seed2"></constructor-arg>
+	</bean>
+	
+	<!-- DataSource -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="username" value="${spring.datasource.username}"></property>
+		<property name="password" value="${spring.datasource.password}"></property>
+		<property name="url" value="${spring.datasource.url}"/>
+		<property name="driverClassName" value="${spring.datasource.driver-class-name}"/>
+		<property name="schema" value="${spring.datasource.schema}"/>
+	</bean>
+	
+	<!-- Hikari DataSource -->
+	<bean id="hikariDataSource" class="com.zaxxer.hikari.HikariDataSource">
+		<property name="username" value="${spring.datasource.username}"></property>
+		<property name="password" value="${spring.datasource.password}"></property>
+		<property name="jdbcUrl" value="${spring.datasource.url}"/>
+		<property name="driverClassName" value="${spring.datasource.driver-class-name}"/>
+		<property name="schema" value="${spring.datasource.schema}"/>
+		<property name="maximumPoolSize" value="5"></property>
+		<!-- <property name="connectionTimeout" value="500"></property> -->
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="hikariDataSource"/>
+	</bean>
+	
+
+	
+</beans>
