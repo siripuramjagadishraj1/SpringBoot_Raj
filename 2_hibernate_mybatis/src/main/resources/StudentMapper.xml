@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='personMapper'>
+	<resultMap type="com.application.mybatis.Student" id="resutId">
+		<result column="sid" property="sid" jdbcType="INTEGER"/>
+		<result column="sname" property="sname" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<select id='getAllStudents' resultMap="personMapper.resutId">
+		SELECT * FROM student
+	</select>
+	
+	<select id="getEachStudentById" parameterType="int" resultMap="personMapper.resutId">
+		select * from student where sid = #{sid}
+	</select>
+	
+	
+	<select id="getEachStudentByName" parameterType="String" resultMap="personMapper.resutId">
+		select * from student where sname = #{userName}
+	</select> 
+	
+	<select id="getEachStudentByNameDemo" parameterType="com.application.mybatis.Student" resultMap="personMapper.resutId">
+		select * from student where sid = #{sid} and sname = #{sname}
+	</select>
+	
+	<select id="getEachStudentByNameDemoMap" parameterType="Map" resultMap="resutId">
+		select * from student where sid = #{sidMap} and sname = #{snameMap}
+	</select>
+	
+	<select id="getEachStudentByNameDemoListParamIn" parameterType="list" resultMap="personMapper.resutId">
+		select * from student where sid in 
+		<foreach item="item" index="index" collection="list"
+      			open="(" separator="," close=")">
+        	#{item}
+  		</foreach>
+	</select>
+	
+	<select id="getEachStudentByNameDemoListParam" parameterType="Map" resultMap="personMapper.resutId">
+		select * from student where sid in 
+		<foreach item="item" index="index" collection="arraylistDemo"
+      			open="(" separator="," close=")">
+        	#{item}
+  		</foreach>
+  		and sname = #{name}
+	</select>
+	
+	<select id="getLikeStudent" parameterType="String" resultMap="personMapper.resutId">
+		select * from student where sname like #{name}||'%'
+	</select>
+	
+	<!-- Insertion -->
+	<insert id="insert" parameterType="com.application.mybatis.Student">
+		insert into student (sname, email) values (#{sname}, #{email})
+	</insert>
+	
+	<!-- Update -->
+	<update id="update" parameterType="Map">
+		update student set sname = #{newName} where sname=#{oldName}
+	</update>
+	
+	<!-- Deletion -->
+	<delete id="delete" parameterType="int">
+		delete from student where sid = #{sidInt}
+	</delete>
+</mapper>

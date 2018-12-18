@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/GE_RENEWABLES</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">password</property>
+        <property name="hibernate.connection.pool_size">10</property>
+        
+		<property name="hibernate.dialect">org.hibernate.dialect.ProgressDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		
+		<!-- removes clob error -->
+		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+		<!-- spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false -->
+		<property name="hibernate.hbm2ddl.auto">create</property>
+		
+		
+		<!-- Mapping Files -->
+		<!-- <mapping resource = "hibernate/Employee.hbm.xml"/> -->
+		
+		<!-- Annotation Configuration -->
+		<mapping class="com.application.hibernate.Employee"></mapping>
+	</session-factory>	
+</hibernate-configuration>
