@@ -33,6 +33,5 @@ Spring Basics:
 6. Spring test cases mocking..(TODO)
 
 ## INFO
---------
 1. Types of <a href="https://www.javatpoint.com/spring-JdbcTemplate-tutorial">JDBCTemplate</a> (JdbcTemplate,SimpleJdbcTemplate,NamedParameterJdbcTemplate,SimpleJdbcInsert ,SimpleJdbcInsert )
 	
