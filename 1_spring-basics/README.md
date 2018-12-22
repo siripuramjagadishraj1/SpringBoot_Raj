@@ -30,4 +30,5 @@ Spring Basics:
 	a. logback-test.xml
 4. Spring+Hibernate with EntityManager(New way) vs Session(Old Way).
 5. Spring+MyBatis (TODO)
+6. Spring test cases mocking..(TODO)
 	
