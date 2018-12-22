@@ -28,4 +28,6 @@ Spring Basics:
 	
 3. Enable/Disable Log back Logging:
 	a. logback-test.xml
+4. Spring+Hibernate with EntityManager(New way) vs Session(Old Way).
+5. Spring+MyBatis (TODO)
 	
