@@ -19,34 +19,22 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.beans.SpringBeanConfiguration;
 
-public class AppStart {
+public class A_Spring_IOC_Xml_Annotation_MAIN {
 	
-	public static Logger log= LoggerFactory.getLogger(AppStart.class);
+	public static Logger log= LoggerFactory.getLogger(A_Spring_IOC_Xml_Annotation_MAIN.class);
 	
 	
 	public static void main(String[] args) throws Exception{
 		//1. XML Configuration
-		//ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml","spring.xml");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml","spring.xml");
 		//2. Zero-XML Configuration
-		ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringBeanConfiguration.class, SpringBeanConfiguration.class);
+		//ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringBeanConfiguration.class, SpringBeanConfiguration.class);
 		for (String each : ctx.getBeanDefinitionNames()) {
-			System.out.println(each+"	:"+ctx.getBean(each));
+			//System.out.println(each+"	:"+ctx.getBean(each));
 		}
 		
-		//DataSource Configuration (DataSource and Hikari)
-		DataSource dataSource = (DataSource)ctx.getBean("dataSource");
-		//DataSource dataSource = (DataSource)ctx.getBean("hikariDataSource");
-		Connection conn = dataSource.getConnection();
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select * from country");
-		while(rs.next()) {
-			System.out.println(rs.getObject(3));
-		}
-		rs.close();
-		stmt.close();
-		conn.close();
-		
-		//Spring JDBC Configuration
+		DataSource dataSource1 = (DataSource)ctx.getBean("dataSource");
+		DataSource dataSource2 = (DataSource)ctx.getBean("hikariDataSource");
 		JdbcTemplate template = (JdbcTemplate)ctx.getBean("jdbcTemplate");
 		List<Map<String, Object>> completeList = template.queryForList("select * from country");
 		completeList.forEach((item)->{

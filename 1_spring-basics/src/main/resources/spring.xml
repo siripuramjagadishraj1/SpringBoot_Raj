@@ -55,7 +55,7 @@
 		<property name="password" value="${spring.datasource.password}"></property>
 		<property name="url" value="${spring.datasource.url}"/>
 		<property name="driverClassName" value="${spring.datasource.driver-class-name}"/>
-		<property name="schema" value="${spring.datasource.schema}"/>
+		<!-- <property name="schema" value="${spring.datasource.schema}"/> -->
 	</bean>
 	
 	<!-- Hikari DataSource -->
@@ -64,7 +64,7 @@
 		<property name="password" value="${spring.datasource.password}"></property>
 		<property name="jdbcUrl" value="${spring.datasource.url}"/>
 		<property name="driverClassName" value="${spring.datasource.driver-class-name}"/>
-		<property name="schema" value="${spring.datasource.schema}"/>
+		<!-- <property name="schema" value="${spring.datasource.schema}"/> -->
 		<property name="maximumPoolSize" value="5"></property>
 		<!-- <property name="connectionTimeout" value="500"></property> -->
 	</bean>
